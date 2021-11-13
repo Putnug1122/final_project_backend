@@ -1,0 +1,11 @@
+const express = require("express");
+const router = express.Router();
+const createSchedules = require("./create.schedulesController");
+const getSchedules = require("./get.schedulesController");
+const updateSchedules = require("./update.schedulesController");
+const deleteSchedules = require("./delete.schedulesController");
+router.post("/", createSchedules.service);
+router.get("/", getSchedules.service);
+router.put("/:id", updateSchedules.service);
+router.delete("/:id", deleteSchedules.service);
+module.exports = router;
