@@ -3,9 +3,10 @@ const createUsers = require("./create.usersController");
 const getUsers = require("./get.usersController");
 const updateUsers = require("./update.usersController");
 const deleteUsers = require("./delete.usersController");
+const login = require("./login.userController");
 router.post("/", createUsers.service);
 router.get("/", getUsers.service);
 router.put("/:id", updateUsers.service);
 router.delete("/:id", deleteUsers.service);
-
+router.post("/login", login.service);
 module.exports = router;

@@ -1,4 +1,5 @@
 const { classes } = require("../../models");
+const { body } = require("express-validator");
 const services = async (req, res) => {
   try {
     const payload = req.body;
@@ -10,4 +11,15 @@ const services = async (req, res) => {
   }
 };
 
-module.exports = { services };
+const validation = [
+  body("name")
+    .notEmpty()
+    .custom(async (value, { req }) => {
+      const where = { name: value, id: { [Op.ne]: req.params.id } };
+      const requestDB = await classes.findOne({ where });
+      if (requestDB) {
+        return Promise.reject("Nama kelas sudah ada");
+      }
+    }),
+];
+module.exports = { services, validation };
