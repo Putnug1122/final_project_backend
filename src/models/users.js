@@ -26,8 +26,10 @@ module.exports = (sequelize, DataTypes) => {
       rule: {
         type: ENUM,
         values: ["admin", "user"],
+        defaultValue: "user",
       },
       email: DataTypes.STRING,
+      username: { type: DataTypes.STRING, unique: true },
       password: {
         type: DataTypes.STRING,
         set(val) {

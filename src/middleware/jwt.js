@@ -1,16 +1,19 @@
 const jwt = require("jsonwebtoken");
 
 const createToken = (user) => {
-  const payload = {
-    id: user.id,
-    email: user.email,
-    name: user.name,
-    rule: user.rule,
-  };
-  const options = {
-    expiresIn: "1d",
-  };
-  return jwt.sign(payload, "private-key-project", options);
+  // const payload = {
+  //   id: user.id,
+  //   email: user.email,
+  //   name: user.name,
+  //   rule: user.rule,
+  // };
+  // const options = {
+  //   expiresIn: "1d",
+  // };
+  // return jwt.sign(payload, "private-key-project", options);
+  delete user.dataValues.password;
+  const token = jwt.sign(user.dataValues, "private-key-project");
+  return token;
 };
 
 const checkJWT = (req, res, next) => {

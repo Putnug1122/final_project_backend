@@ -33,7 +33,7 @@ const validation = [
         return Promise.reject("Kode kelas harus 6 digit");
       }
     }),
-  body("star_date").notEmpty().withMessage("Tanggal mulai harus diisi"),
+  body("start_date").notEmpty().withMessage("Tanggal mulai harus diisi"),
   body("end_date").notEmpty().withMessage("Tanggal selesai harus diisi"),
 ];
 module.exports = { services, validation };

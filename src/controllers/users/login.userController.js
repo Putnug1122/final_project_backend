@@ -1,29 +1,36 @@
 const { users } = require("../../models");
 const { compareSync } = require("bcrypt");
 const { createToken } = require("../../middleware/jwt");
-const service = async (req, res) => {
+const { body, check } = require("express-validator");
+
+const service = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
-    const user = await users.findOne({ where: { email } });
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-      });
+    const user =
+      (await users.findOne({ where: { email: req.body.username } })) ||
+      (await users.findOne({ where: { username: req.body.username } }));
+    if (user) {
+      const validUser = compareSync(req.body.password, user.password);
+      if (validUser) {
+        const name = user.name || user.username;
+        return res.json({
+          status: "success",
+          access: createToken(user),
+          msg: `Welcome ${name}`,
+        });
+      } else {
+        return res.status(401).json({ msg: "Wrong Password" });
+      }
+    } else {
+      return res.status(404).json({ msg: "User Not Found" });
     }
-    if (!compareSync(password, user.password)) {
-      return res.status(401).json({
-        message: "Invalid password",
-      });
-    }
-    const token = createToken(user);
-    return res.status(200).json({
-      message: "Login success",
-      token,
-    });
   } catch (error) {
-    return res.status(500).json({
-      message: "Internal server error",
-    });
+    return res.status(500).json({ msg: error.toString() });
   }
 };
-module.exports = { service };
+
+const validation = [
+  body("username").notEmpty().withMessage("Email or Username required"),
+  body("password").notEmpty().withMessage("Password is required"),
+];
+
+module.exports = { service, validation };
