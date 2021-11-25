@@ -1,10 +1,25 @@
 const { users } = require("../../models");
-const service = async (req, res) => {
+const service = async function (req, res, next) {
   try {
-    const result = await users.findAll();
-    res.status(200).send(result);
+    const where = {};
+    if (req.params.id) {
+      where.id = req.params.id;
+    }
+    const requestDB = await users.findAll({
+      where,
+      attributes: {
+        exclude: ["password"],
+      },
+    });
+    res.status(200).json({
+      status: "success",
+      data: requestDB,
+    });
   } catch (error) {
-    res.status(500).send(error);
+    return res.status(500).json({
+      status: "error",
+      message: error.toString(),
+    });
   }
 };
 

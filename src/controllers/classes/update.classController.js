@@ -1,4 +1,7 @@
-const { classes } = require("../../models");
+const {
+  classes,
+  Sequelize: { Op },
+} = require("../../models");
 const { body } = require("express-validator");
 const services = async (req, res) => {
   try {

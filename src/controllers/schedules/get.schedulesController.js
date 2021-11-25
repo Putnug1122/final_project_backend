@@ -11,9 +11,7 @@ const service = async (req, res) => {
         exclude: ["createdAt", "updatedAt"],
       },
     });
-    return res.status(200).json({
-      schedules: schedulesData,
-    });
+    return res.status(200).json(schedulesData);
   } catch (error) {
     return res.status(500).json({
       message: error.toString(),

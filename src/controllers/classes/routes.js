@@ -6,14 +6,9 @@ const updateClass = require("./update.classController");
 const deleteClass = require("./delete.classController");
 const validator = require("../../helpers/validator");
 const { checkJWT } = require("../../middleware/jwt");
-router.post(
-  "/",
-  checkJWT,
-  createClass.validation,
-  validator,
-  createClass.services
-);
+router.post("/", createClass.validation, validator, createClass.services);
 router.get("/", getClass.services);
+router.get("/:id", getClass.services);
 router.put("/:id", updateClass.validation, validator, updateClass.services);
 router.delete("/:id", deleteClass.services);
 

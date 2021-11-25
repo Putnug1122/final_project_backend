@@ -1,5 +1,5 @@
 "use strict";
-const { Model, ENUM } = require("sequelize");
+const { Model, ENUM, Sequelize } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
   class join_classes extends Model {
     /**
@@ -16,13 +16,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   join_classes.init(
     {
-      id: {
+      user_id: {
         type: DataTypes.UUID,
         primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
       },
-      user_id: DataTypes.UUID,
-      class_id: DataTypes.INTEGER(11),
+      class_id: { type: DataTypes.INTEGER(11), primaryKey: true },
       role: {
         type: ENUM,
         values: ["student", "tutor", "facilitator"],
