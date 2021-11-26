@@ -1,25 +1,28 @@
 const { users } = require("../../models");
+
 const service = async function (req, res, next) {
   try {
     const where = {};
-    if (req.params.id) {
-      where.id = req.params.id;
+    if (req.auth) {
+      where.id = req.auth.id;
+    } else {
+      const requestDB = await users.findAll({
+        where,
+        attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+      });
+      return res.json({ msg: "data semua user", data: requestDB });
     }
+
     const requestDB = await users.findAll({
       where,
-      attributes: {
-        exclude: ["password"],
-      },
+      attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
     });
-    res.status(200).json({
-      status: "success",
-      data: requestDB,
+    return res.json({
+      msg: "data user berhasil diterima.",
+      data: requestDB[0],
     });
   } catch (error) {
-    return res.status(500).json({
-      status: "error",
-      message: error.toString(),
-    });
+    return res.status(500).json({ msg: error.toString() });
   }
 };
 

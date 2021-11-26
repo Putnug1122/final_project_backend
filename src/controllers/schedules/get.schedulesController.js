@@ -1,4 +1,4 @@
-const { schedules } = require("../../models");
+const { schedules, materials } = require("../../models");
 const service = async (req, res) => {
   try {
     const where = {};
@@ -10,6 +10,14 @@ const service = async (req, res) => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      include: [
+        {
+          model: materials,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
     });
     return res.status(200).json(schedulesData);
   } catch (error) {

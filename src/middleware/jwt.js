@@ -1,23 +1,15 @@
 const jwt = require("jsonwebtoken");
 
 const createToken = (user) => {
-  // const payload = {
-  //   id: user.id,
-  //   email: user.email,
-  //   name: user.name,
-  //   rule: user.rule,
-  // };
-  // const options = {
-  //   expiresIn: "1d",
-  // };
-  // return jwt.sign(payload, "private-key-project", options);
   delete user.dataValues.password;
-  const token = jwt.sign(user.dataValues, "private-key-project");
+  const token = jwt.sign({ user: user.dataValues }, "private-key-project", {
+    expiresIn: "24h",
+  });
   return token;
 };
 
 const checkJWT = (req, res, next) => {
-  const token = req.get("Authorization");
+  const token = req.headers.authorization.split(" ")[1];
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
   } else {

@@ -1,4 +1,4 @@
-const { users } = require("../../models");
+const { users } = require("../../../models");
 const { body } = require("express-validator");
 const service = async (req, res, next) => {
   try {
