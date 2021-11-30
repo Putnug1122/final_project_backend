@@ -1,15 +1,23 @@
-const { materials } = require("../../models");
+const { materials, schedules } = require("../../models");
 const service = async (req, res) => {
   try {
     const where = {};
     if (req.params.id) {
-      where.id = req.params.id;
+      where.schedule_id = req.params.id;
     }
     const data = await materials.findAll({
       where,
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      include: [
+        {
+          model: schedules,
+          attributes: {
+            exclude: ["createdAt", "updatedAt"],
+          },
+        },
+      ],
     });
     return res.status(200).json(data);
   } catch (error) {

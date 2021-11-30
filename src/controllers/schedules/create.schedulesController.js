@@ -1,7 +1,9 @@
 const { schedules } = require("../../models");
 const service = async (req, res) => {
   try {
-    const data = await schedules.create(req.body);
+    const where = { class_id: req.params.id };
+    const payload = req.body;
+    const data = await schedules.create(payload, where);
     return res.status(200).json({
       status: "success",
       message: "schedule created successfully",

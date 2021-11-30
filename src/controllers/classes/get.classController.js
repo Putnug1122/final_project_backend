@@ -15,12 +15,12 @@ const services = async (req, res) => {
             exclude: ["createdAt", "updatedAt"],
           },
         },
-        {
-          model: join_classes,
-          attributes: {
-            exclude: ["createdAt", "updatedAt"],
-          },
-        },
+        // {
+        //   model: join_classes,
+        //   attributes: {
+        //     exclude: ["createdAt", "updatedAt"],
+        //   },
+        // },
       ],
     });
     return res.json(requestDB);

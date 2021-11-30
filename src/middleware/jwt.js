@@ -9,7 +9,20 @@ const createToken = (user) => {
 };
 
 const checkJWT = (req, res, next) => {
-  const token = req.headers.authorization.split(" ")[1];
+  if (typeof req.headers.authorization !== "string") {
+    return res.status(401).json({
+      error: "No token provided",
+    });
+  }
+  const tokens = req.headers.authorization.split(" ");
+  if (tokens.length !== 2) {
+    return res.status(401).json({
+      error: "Token error",
+    });
+  }
+  const token = tokens[1];
+
+  // const token = req.headers.authorization.split(" ")[1];
   if (!token) {
     return res.status(401).json({ message: "Unauthorized" });
   } else {

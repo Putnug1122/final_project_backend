@@ -9,7 +9,10 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      materials.belongsTo(models.schedules, { foreignKey: "schedule_id" });
+      materials.belongsTo(models.schedules, {
+        foreignKey: "schedule_id",
+        onDelete: "CASCADE",
+      });
     }
   }
   materials.init(

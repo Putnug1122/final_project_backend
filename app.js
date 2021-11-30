@@ -6,7 +6,7 @@ const routes = require("./src/routes");
 
 const { sequelize, Sequelize } = require("./src/models");
 const cors = require("cors");
-sequelize.sync();
+// sequelize.sync({ force: true });
 
 var app = express();
 app.use(cors());

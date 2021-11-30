@@ -4,9 +4,11 @@ const createMaterial = require("./create.materialController");
 const getMaterials = require("./get.materialController");
 const updateMaterial = require("./update.materialController");
 const deleteMaterial = require("./delete.materialController");
-router.post("/", createMaterial.service);
-router.get("/", getMaterials.service);
-router.put("/:id", updateMaterial.service);
-router.delete("/:id", deleteMaterial.service);
+const auth = require("../../middleware/jwt");
+router.post("/", auth.checkJWT, createMaterial.service);
+router.get("/", auth.checkJWT, getMaterials.service);
+router.get("/:id", auth.checkJWT, getMaterials.service);
+router.put("/:id", auth.checkJWT, updateMaterial.service);
+router.delete("/:id", auth.checkJWT, deleteMaterial.service);
 
 module.exports = router;
