@@ -7,14 +7,25 @@ module.exports = (sequelize, DataTypes) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
-    static associate(models) {
+    static associate({
+      classes,
+      join_classes,
+      presences,
+      materials,
+      schedules,
+    }) {
       // define association here
-      schedules.belongsTo(models.classes, {
+      schedules.belongsTo(classes, {
         foreignKey: "class_id",
         onDelete: "CASCADE",
       });
-      schedules.hasMany(models.presences);
-      schedules.hasMany(models.materials);
+      schedules.belongsToMany(join_classes, {
+        through: "presences",
+        foreignKey: "schedule_id",
+        as: "absensi",
+      });
+      // schedules.hasMany(presences);
+      schedules.hasMany(materials);
     }
   }
   schedules.init(

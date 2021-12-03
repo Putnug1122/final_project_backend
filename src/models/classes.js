@@ -15,7 +15,10 @@ module.exports = (sequelize, DataTypes) => {
         foreignKey: "class_id",
         onDelete: "CASCADE",
       });
-      classes.hasMany(schedules);
+      classes.hasMany(schedules, {
+        foreignKey: "class_id",
+        onDelete: "CASCADE",
+      });
     }
   }
   classes.init(

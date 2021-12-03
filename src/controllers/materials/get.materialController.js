@@ -7,6 +7,7 @@ const service = async (req, res) => {
     }
     const data = await materials.findAll({
       where,
+      order: [["created_at", "DESC"]],
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },

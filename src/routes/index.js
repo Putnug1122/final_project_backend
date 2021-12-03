@@ -7,6 +7,7 @@ const classRouter = require("../controllers/classes/routes");
 const materialRouter = require("../controllers/materials/routes");
 const scheduleRouter = require("../controllers/schedules/routes");
 const joinClassesRouter = require("../controllers/joinclasses/routes");
+const presenceRouter = require("../controllers/presences/routes");
 router.use("/user", userRouter);
 router.use("/register", registerRoutes);
 router.use("/login", loginRoutes);
@@ -14,5 +15,6 @@ router.use("/class", classRouter);
 router.use("/material", materialRouter);
 router.use("/schedule", scheduleRouter);
 router.use("/join", joinClassesRouter);
+router.use("/presence", presenceRouter);
 
 module.exports = router;

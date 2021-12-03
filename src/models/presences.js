@@ -9,8 +9,8 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
-      presences.belongsTo(models.join_classes, { foreignKey: "join_class_id" });
-      presences.belongsTo(models.schedules, { foreignKey: "schedule_id" });
+      // presences.belongsTo(models.join_classes, { foreignKey: "join_class_id" });
+      // presences.belongsTo(models.schedules, { foreignKey: "schedule_id" });
     }
   }
   presences.init(
