@@ -2,11 +2,11 @@ const { presences, classes, join_classes, schedules } = require("../../models");
 const service = async (req, res, next) => {
   try {
     const requestSchedule = await schedules.findOne({
-      where: { schedule_code: req.body.schedule_code },
+      where: { code: req.body.schedule_code },
     });
     if (requestSchedule) {
       const requestClass = await classes.findOne({
-        where: { class_code: req.body.class_code },
+        where: { code: req.body.class_code },
       });
       if (requestClass) {
         const requestJoinClass = await join_classes.findOne({
