@@ -38,8 +38,8 @@ module.exports = (sequelize, DataTypes) => {
       class_id: DataTypes.INTEGER(11),
       name: DataTypes.STRING,
       code: DataTypes.STRING(6),
-      start: DataTypes.DATEONLY,
-      end: DataTypes.DATEONLY,
+      start: DataTypes.DATE,
+      end: DataTypes.DATE,
     },
     {
       sequelize,

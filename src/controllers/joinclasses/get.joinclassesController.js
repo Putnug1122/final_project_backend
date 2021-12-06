@@ -2,10 +2,9 @@ const { classes, join_classes, users } = require("../../models");
 const service = async (req, res) => {
   try {
     if (req.params.id) {
-      const where = {};
-      if (req.params.id) {
-        where.id = req.params.id;
-      }
+      const where = {
+        id: req.params.id,
+      };
       const data = await users.findAll({
         attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
         include: {

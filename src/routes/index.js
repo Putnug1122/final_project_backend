@@ -8,6 +8,7 @@ const materialRouter = require("../controllers/materials/routes");
 const scheduleRouter = require("../controllers/schedules/routes");
 const joinClassesRouter = require("../controllers/joinclasses/routes");
 const presenceRouter = require("../controllers/presences/routes");
+
 router.use("/user", userRouter);
 router.use("/register", registerRoutes);
 router.use("/login", loginRoutes);
