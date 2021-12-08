@@ -15,11 +15,8 @@ module.exports = (sequelize, DataTypes) => {
   }
   presences.init(
     {
-      join_class_id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue: DataTypes.UUIDV4,
-      },
+      join_class_id: DataTypes.UUID,
+
       schedule_id: DataTypes.UUID,
     },
     {

@@ -11,13 +11,17 @@ const service = async (req, res, next) => {
         through: { attributes: [] },
         include: {
           model: schedules,
-          include: {
-            model: join_classes,
-            as: "absensi",
-            where: { user_id: req.auth.id },
-            required: false,
-          },
           attributes: ["id", "name", "code", "start", "end"],
+          include: [
+            {
+              model: join_classes,
+              as: "absensi",
+              where: { user_id: req.auth.id },
+              attributes: {
+                exclude: ["createdAt", "updatedAt"],
+              },
+            },
+          ],
         },
       },
     });

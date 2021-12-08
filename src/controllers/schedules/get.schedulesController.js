@@ -10,6 +10,7 @@ const service = async (req, res) => {
       attributes: {
         exclude: ["createdAt", "updatedAt"],
       },
+      order: [["createdAt", "DESC"]],
       include: [
         {
           model: classes,
