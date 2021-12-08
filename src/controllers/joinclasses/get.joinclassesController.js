@@ -1,4 +1,4 @@
-const { classes, join_classes, users } = require("../../models");
+const { classes, join_classes, users, schedules } = require("../../models");
 const service = async (req, res) => {
   try {
     if (req.params.id) {
@@ -7,13 +7,13 @@ const service = async (req, res) => {
       };
       const data = await users.findAll({
         attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
+        where: { id: req.auth.id },
         include: {
           model: classes,
           where,
           attributes: { exclude: ["createdAt", "updatedAt", "deletedAt"] },
         },
       });
-
       return res.json({ msg: "sukses", data: data });
     } else {
       const data = await join_classes.findAll({

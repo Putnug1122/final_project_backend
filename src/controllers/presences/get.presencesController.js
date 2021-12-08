@@ -8,20 +8,16 @@ const service = async (req, res, next) => {
       include: {
         model: classes,
         attributes: ["id", "name", "code"],
-        through: { attributes: [] },
+        through: { attributes: ["role"] },
         include: {
           model: schedules,
           attributes: ["id", "name", "code", "start", "end"],
-          include: [
-            {
-              model: join_classes,
-              as: "absensi",
-              where: { user_id: req.auth.id },
-              attributes: {
-                exclude: ["createdAt", "updatedAt"],
-              },
-            },
-          ],
+          include: {
+            model: join_classes,
+            as: "absensi",
+            where: { user_id: req.auth.id },
+            required: false,
+          },
         },
       },
     });
