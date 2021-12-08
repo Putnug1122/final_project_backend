@@ -4,7 +4,7 @@ const service = async (req, res) => {
   try {
     const requestDB = await join_classes.destroy({
       where: {
-        user_id: req.params.id,
+        id: req.params.id,
       },
     });
     if (requestDB) {
