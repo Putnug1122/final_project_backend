@@ -3,7 +3,7 @@
     "username": "root",
     "password": "4p34d3nt0",
     "database": "final_project",
-    "host": "127.0.0.1",
+    "host": "10.0.2.2",
     "dialect": "mysql",
     "define": {
       "underscored": true
