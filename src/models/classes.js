@@ -23,7 +23,11 @@ module.exports = (sequelize, DataTypes) => {
   }
   classes.init(
     {
-      id: { type: DataTypes.INTEGER(11), primaryKey: true },
+      id: {
+        type: DataTypes.INTEGER(11),
+        primaryKey: true,
+        autoIncrement: true,
+      },
       name: DataTypes.STRING,
       code: DataTypes.STRING(6),
       description: DataTypes.STRING,
@@ -34,6 +38,7 @@ module.exports = (sequelize, DataTypes) => {
     {
       sequelize,
       modelName: "classes",
+      initialAutoIncrement: 1,
     }
   );
   return classes;
